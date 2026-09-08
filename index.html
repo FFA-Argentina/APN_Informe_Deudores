@@ -45,6 +45,14 @@
   .sub{margin-top:12px;color:var(--muted);font-size:14px;max-width:62ch;line-height:1.5}
   .meta{margin-top:14px;display:flex;gap:22px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
   .meta b{color:var(--ink);font-weight:600}
+  .doc-link{margin-top:16px;display:inline-flex;align-items:center;gap:9px;
+    background:var(--forest);color:#F3EEE2;text-decoration:none;border:1.5px solid var(--forest);
+    border-radius:2px;padding:10px 15px;font-size:13px;font-weight:600;letter-spacing:.01em;
+    min-height:44px;transition:background .14s,color .14s}
+  .doc-link:hover{background:var(--paper);color:var(--forest)}
+  .doc-link svg{flex:none}
+  .doc-link .dl-sub{font-weight:400;opacity:.72;font-size:12px}
+  footer a{color:var(--forest);font-weight:600}
 
   /* ---------- controls ---------- */
   .controls{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:flex-end;
@@ -191,6 +199,9 @@
     h1{font-size:22px;max-width:none}
     .sub{font-size:13px;margin-top:10px}
     .meta{gap:6px 16px;font-size:11px;margin-top:11px}
+    .doc-link{width:100%;margin-top:14px;padding:11px 13px;font-size:12.5px;
+      flex-wrap:wrap;row-gap:2px;line-height:1.25}
+    .doc-link .dl-sub{flex-basis:100%;padding-left:24px}
 
     .controls{gap:14px;padding:14px 0 4px;width:100%}
     .ctl{width:100%;min-width:0;max-width:100%}
@@ -251,6 +262,16 @@
       <span><b>32</b> dependencias</span>
       <span><b>59</b> en gestión judicial</span>
     </div>
+    <a class="doc-link" href="informe-deudas-31ago26.pdf" target="_blank" rel="noopener">
+      <svg width="15" height="17" viewBox="0 0 15 17" fill="none" aria-hidden="true">
+        <path d="M9 1H3a1.5 1.5 0 0 0-1.5 1.5v12A1.5 1.5 0 0 0 3 16h9a1.5 1.5 0 0 0 1.5-1.5V5.5L9 1Z"
+              stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M8.8 1.2v4.4h4.4M4.6 9.4h5.8M4.6 12.2h4" stroke="currentColor" stroke-width="1.4"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Informe de deudas · relevamiento general
+      <span class="dl-sub">PDF, 18 páginas</span>
+    </a>
   </div>
 </header>
 
@@ -361,6 +382,9 @@
 
 <footer>
   <b>Metodología.</b> Stock de deuda exigible al 31/08/2026 sobre comprobantes con saldo impago (liquidaciones, facturas, multas y notas de débito). Los intereses se devengan desde el vencimiento de acuerdo con las prácticas administrativas normadas, aplicando la tasa activa del Banco de la Nación Argentina. La deuda neta descuenta pagos a cuenta conciliados en las cuentas corrientes. Un deudor se considera con habilitación vigente cuando cuenta con un permiso, concesión o habilitación activa al 31/08/2026. La cartera en gestión judicial corresponde a los comprobantes debidamente identificados en base de datos. La conversión a dólares utiliza una paridad de referencia de $1.500. Fuente: elaboración propia sobre información disponible en ReNaRI.
+  El análisis completo, con las tablas por razón social, por dependencia, de prestadores activos y de
+  la cartera judicializada, está en el
+  <a href="informe-deudas-31ago26.pdf" target="_blank" rel="noopener">Informe de deudas · relevamiento general al 31/08/2026</a>.
 </footer>
 
 <script>

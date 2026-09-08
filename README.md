@@ -3,15 +3,23 @@
 Tablero interactivo del stock de deuda exigible de prestadores turísticos de la
 Administración de Parques Nacionales al **31 de agosto de 2026**.
 
-Es un único archivo `index.html` autocontenido: los datos, los estilos, el logo y
-toda la lógica del gráfico están dentro. No usa frameworks, ni build, ni servidor.
-La única solicitud externa es la tipografía Archivo desde Google Fonts, y si no
-carga el diseño se mantiene con la pila de fuentes del sistema.
+El tablero es un único archivo `index.html` autocontenido: los datos, los estilos,
+el logo y toda la lógica del gráfico están dentro. No usa frameworks, ni build, ni
+servidor. La única solicitud externa es la tipografía Archivo desde Google Fonts, y
+si no carga el diseño se mantiene con la pila de fuentes del sistema.
+
+Junto al tablero se publica `informe-deudas-31ago26.pdf`, el **Informe de deudas ·
+relevamiento general** con el análisis completo: comparabilidad con julio, tablas de
+capital e intereses por razón social y por dependencia, prestadores activos,
+concesionarios y permisionarios, deudores inactivos, Nahuel Huapi, cartera
+judicializada, anticuación y síntesis. Se accede desde el botón de la portada del
+tablero y desde el enlace al pie de la nota metodológica. El archivo tiene que
+quedar en la misma carpeta que `index.html`, porque el enlace es relativo.
 
 ## Publicar en GitHub Pages
 
 1. Crear un repositorio nuevo y subir el contenido de esta carpeta a la raíz de la
-   rama `main` (los tres archivos: `index.html`, `README.md`, `.nojekyll`).
+   rama `main`: `index.html`, `informe-deudas-31ago26.pdf`, `README.md` y `.nojekyll`.
 
    ```bash
    git init
@@ -32,8 +40,11 @@ El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll. No es
 imprescindible acá, pero previene sorpresas si más adelante se agregan archivos
 o carpetas cuyo nombre empiece con guion bajo.
 
-Para publicar dentro de un repositorio ya existente, alcanza con poner
-`index.html` en una carpeta `docs/` y elegir esa carpeta en el paso 4.
+Para publicar dentro de un repositorio ya existente, alcanza con poner `index.html`
+y el PDF en una carpeta `docs/` y elegir esa carpeta en el paso 4.
+
+Si más adelante se reemplaza el informe por una edición posterior, conviene
+mantener el nombre del archivo o actualizar los dos enlaces del `index.html`.
 
 ## Actualizar los datos
 
