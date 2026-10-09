@@ -1,30 +1,29 @@
 # Deuda de prestadores turísticos · APN
 
 Tablero interactivo del stock de deuda exigible de prestadores turísticos de la
-Administración de Parques Nacionales al **31 de agosto de 2026**.
+Administración de Parques Nacionales al **30 de septiembre de 2026**, publicable
+en GitHub Pages e instalable como aplicación en Android y iOS.
 
 El tablero es un único archivo `index.html` autocontenido: los datos, los estilos,
 el logo y toda la lógica del gráfico están dentro. No usa frameworks, ni build, ni
 servidor. La única solicitud externa es la tipografía Archivo desde Google Fonts, y
 si no carga el diseño se mantiene con la pila de fuentes del sistema.
 
-Junto al tablero se publica `informe-deudas-31ago26.pdf`, el **Informe de deudas ·
-relevamiento general** con el análisis completo: comparabilidad con julio, tablas de
-capital e intereses por razón social y por dependencia, prestadores activos,
-concesionarios y permisionarios, deudores inactivos, Nahuel Huapi, cartera
-judicializada, anticuación y síntesis. Se accede desde el botón de la portada del
-tablero y desde el enlace al pie de la nota metodológica. El archivo tiene que
-quedar en la misma carpeta que `index.html`, porque el enlace es relativo.
+Junto al tablero se publica `informe-deudas-30sep26.pdf`, el **Informe de deudas ·
+relevamiento general** con el análisis completo en dieciocho páginas:
+comparabilidad con agosto, tablas de capital e intereses por razón social y por
+dependencia, prestadores activos, concesionarios y permisionarios, deudores
+inactivos, Nahuel Huapi, cartera judicializada, anticuación y síntesis. Se accede
+desde el enlace de la portada del tablero y desde el pie de la nota metodológica.
 
 ## Publicar en GitHub Pages
 
-1. Crear un repositorio nuevo y subir el contenido de esta carpeta a la raíz de la
-   rama `main`: `index.html`, `informe-deudas-31ago26.pdf`, `README.md` y `.nojekyll`.
+1. Subir el contenido de esta carpeta a la raíz de la rama `main`.
 
    ```bash
    git init
    git add .
-   git commit -m "Tablero de deuda al 31/08/2026"
+   git commit -m "Tablero de deuda al 30/09/2026"
    git branch -M main
    git remote add origin https://github.com/USUARIO/REPOSITORIO.git
    git push -u origin main
@@ -33,33 +32,64 @@ quedar en la misma carpeta que `index.html`, porque el enlace es relativo.
 2. En el repositorio, ir a **Settings → Pages**.
 3. En *Build and deployment*, elegir **Deploy from a branch**.
 4. Seleccionar la rama `main` y la carpeta `/ (root)`. Guardar.
-5. A los dos o tres minutos el tablero queda publicado en
+5. A los dos o tres minutos queda publicado en
    `https://USUARIO.github.io/REPOSITORIO/`.
 
-El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll. No es
-imprescindible acá, pero previene sorpresas si más adelante se agregan archivos
-o carpetas cuyo nombre empiece con guion bajo.
+Todos los archivos tienen que quedar juntos y los enlaces son relativos, de modo
+que también funciona desde una carpeta `docs/` o desde un subdirectorio del sitio.
+El archivo `.nojekyll` evita que GitHub procese el sitio con Jekyll.
 
-Para publicar dentro de un repositorio ya existente, alcanza con poner `index.html`
-y el PDF en una carpeta `docs/` y elegir esa carpeta en el paso 4.
+## Instalar como aplicación
 
-Si más adelante se reemplaza el informe por una edición posterior, conviene
-mantener el nombre del archivo o actualizar los dos enlaces del `index.html`.
+GitHub Pages sirve el sitio por HTTPS, que es la condición que exigen los
+teléfonos para instalar una aplicación web.
 
-## Actualizar los datos
+- **Android (Chrome):** el navegador ofrece «Instalar aplicación» al entrar; si no
+  aparece, está en el menú ⋮ → *Agregar a la pantalla principal*.
+- **iOS (Safari):** botón Compartir → *Agregar a pantalla de inicio*. En iPhone y
+  iPad la instalación sólo funciona desde Safari, no desde Chrome ni Firefox.
+
+Una vez instalado abre a pantalla completa, sin barra de direcciones, con su
+ícono propio, y **funciona sin conexión**: el service worker guarda el tablero y
+el informe en el dispositivo la primera vez que se abre.
+
+Cuando se publica una versión nueva, la app la detecta y muestra un aviso
+«Actualizar» al pie; al tocarlo recarga con los datos nuevos.
+
+## Archivos
+
+| Archivo | Para qué sirve |
+|---|---|
+| `index.html` | El tablero completo, con los datos incluidos |
+| `informe-deudas-30sep26.pdf` | Informe de dieciocho páginas |
+| `manifest.webmanifest` | Nombre, colores e íconos de la aplicación |
+| `sw.js` | Service worker: caché, uso sin conexión y avisos de actualización |
+| `icon-192.png`, `icon-512.png` | Íconos de la aplicación |
+| `icon-maskable-512.png` | Ícono adaptativo de Android |
+| `icon-180.png` | Ícono de pantalla de inicio de iOS |
+| `favicon.ico` | Ícono de la pestaña del navegador |
+| `.nojekyll` | Desactiva el procesamiento Jekyll de GitHub |
+
+## Actualizar al mes siguiente
+
+Al reemplazar los datos hay que **cambiar la constante `VERSION` de `sw.js`**
+(por ejemplo a `deuda-apn-2026-10-31`). Es lo que le avisa a los teléfonos que ya
+tienen la app instalada que hay contenido nuevo; sin ese cambio seguirían viendo
+la versión guardada. Si además cambia el nombre del PDF, hay que actualizarlo en
+la lista `ASSETS` de `sw.js` y en los dos enlaces del `index.html`.
 
 Los datos viven en una única línea del `index.html`, en la constante `DATA`
-declarada al comienzo del `<script>`. La estructura es:
+declarada al comienzo del `<script>`:
 
 ```js
 {
-  years:     ["≤2014", "2015", …, "2025", "ago-26"],   // fechas de corte
-  deps:      ["Calilegua", "Chaco", …],                 // dependencias
+  years:     ["≤2014", "2015", …, "2025", "sep-26"],   // fechas de corte
+  deps:      ["Aconquija", "Baritú", …],                // dependencias
   deudores:  [[nombre, habilitadoVigente, [documentos]], …],
   facts:     [[deudor, dependencia, gestiónJudicial, primerCorte,
                capitalPorCorte[], interesesPorCorte[],
                pagoACuentaCapital, pagoACuentaIntereses, comprobantes], …],
-  usd:       1500
+  usd:       1550
 }
 ```
 
@@ -85,4 +115,12 @@ residual, de modo que las series suman el total del universo seleccionado.
 
 ## Metodología
 
-La nota metodológica completa está al pie del tablero.
+La nota metodológica completa está al pie del tablero y desarrollada en el informe.
+
+Sobre esta edición: el relevamiento de septiembre requirió sucesivas depuraciones
+del insumo. Las primeras versiones de la planilla llegaron con el devengamiento de
+intereses parcialmente actualizado y con 123 comprobantes dados de alta sin las
+fórmulas de cálculo. Subsanadas esas omisiones en el archivo de origen, las cifras
+del tablero y del informe reproducen las columnas de la planilla al centavo:
+capital $ 1.071.004.891,26, intereses $ 474.891.823,91 y deuda total
+$ 1.545.896.715,17.
