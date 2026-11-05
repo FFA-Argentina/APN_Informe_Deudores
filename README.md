@@ -1,7 +1,7 @@
 # Deuda de prestadores turísticos · APN
 
 Tablero interactivo del stock de deuda exigible de prestadores turísticos de la
-Administración de Parques Nacionales al **30 de septiembre de 2026**, publicable
+Administración de Parques Nacionales al **31 de octubre de 2026**, publicable
 en GitHub Pages e instalable como aplicación en Android y iOS.
 
 El tablero es un único archivo `index.html` autocontenido: los datos, los estilos,
@@ -9,9 +9,9 @@ el logo y toda la lógica del gráfico están dentro. No usa frameworks, ni buil
 servidor. La única solicitud externa es la tipografía Archivo desde Google Fonts, y
 si no carga el diseño se mantiene con la pila de fuentes del sistema.
 
-Junto al tablero se publica `informe-deudas-30sep26.pdf`, el **Informe de deudas ·
+Junto al tablero se publica `informe-deudas-31oct26.pdf`, el **Informe de deudas ·
 relevamiento general** con el análisis completo en dieciocho páginas:
-comparabilidad con agosto, tablas de capital e intereses por razón social y por
+comparabilidad con septiembre, tablas de capital e intereses por razón social y por
 dependencia, prestadores activos, concesionarios y permisionarios, deudores
 inactivos, Nahuel Huapi, cartera judicializada, anticuación y síntesis. Se accede
 desde el enlace de la portada del tablero y desde el pie de la nota metodológica.
@@ -23,7 +23,7 @@ desde el enlace de la portada del tablero y desde el pie de la nota metodológic
    ```bash
    git init
    git add .
-   git commit -m "Tablero de deuda al 30/09/2026"
+   git commit -m "Tablero de deuda al 31/10/2026"
    git branch -M main
    git remote add origin https://github.com/USUARIO/REPOSITORIO.git
    git push -u origin main
@@ -61,7 +61,7 @@ Cuando se publica una versión nueva, la app la detecta y muestra un aviso
 | Archivo | Para qué sirve |
 |---|---|
 | `index.html` | El tablero completo, con los datos incluidos |
-| `informe-deudas-30sep26.pdf` | Informe de dieciocho páginas |
+| `informe-deudas-31oct26.pdf` | Informe de dieciocho páginas |
 | `manifest.webmanifest` | Nombre, colores e íconos de la aplicación |
 | `sw.js` | Service worker: caché, uso sin conexión y avisos de actualización |
 | `icon-192.png`, `icon-512.png` | Íconos de la aplicación |
@@ -73,7 +73,7 @@ Cuando se publica una versión nueva, la app la detecta y muestra un aviso
 ## Actualizar al mes siguiente
 
 Al reemplazar los datos hay que **cambiar la constante `VERSION` de `sw.js`**
-(por ejemplo a `deuda-apn-2026-10-31`). Es lo que le avisa a los teléfonos que ya
+(por ejemplo a `deuda-apn-2026-11-30`). Es lo que le avisa a los teléfonos que ya
 tienen la app instalada que hay contenido nuevo; sin ese cambio seguirían viendo
 la versión guardada. Si además cambia el nombre del PDF, hay que actualizarlo en
 la lista `ASSETS` de `sw.js` y en los dos enlaces del `index.html`.
@@ -83,7 +83,7 @@ declarada al comienzo del `<script>`:
 
 ```js
 {
-  years:     ["≤2014", "2015", …, "2025", "sep-26"],   // fechas de corte
+  years:     ["≤2014", "2015", …, "2025", "oct-26"],   // fechas de corte
   deps:      ["Aconquija", "Baritú", …],                // dependencias
   deudores:  [[nombre, habilitadoVigente, [documentos]], …],
   facts:     [[deudor, dependencia, gestiónJudicial, primerCorte,
@@ -117,10 +117,18 @@ residual, de modo que las series suman el total del universo seleccionado.
 
 La nota metodológica completa está al pie del tablero y desarrollada en el informe.
 
-Sobre esta edición: el relevamiento de septiembre requirió sucesivas depuraciones
-del insumo. Las primeras versiones de la planilla llegaron con el devengamiento de
-intereses parcialmente actualizado y con 123 comprobantes dados de alta sin las
-fórmulas de cálculo. Subsanadas esas omisiones en el archivo de origen, las cifras
-del tablero y del informe reproducen las columnas de la planilla al centavo:
-capital $ 1.071.004.891,26, intereses $ 474.891.823,91 y deuda total
-$ 1.545.896.715,17.
+Sobre esta edición: la planilla al 31/10/2026 llegó íntegra. Las fórmulas están completas
+en las 11.035 filas, capital más intereses iguala la deuda total, y las cifras del tablero
+y del informe reproducen las columnas de la planilla al centavo: capital
+$ 1.023.137.107,30, intereses $ 483.851.343,37 y deuda total $ 1.506.988.450,67.
+Los pagos a cuenta conciliados suman $ 189.042.172,31, con lo que la deuda neta
+exigible asciende a $ 1.317.946.278,36.
+
+La tabla de tasas de esta planilla revisa la tasa activa de septiembre de 2,219% a
+2,15%. El cálculo de octubre aplica la tabla tal como viene; la comparación con
+septiembre usa las cifras publicadas entonces. La diferencia en el stock de intereses
+es de unos $ 0,52 millones.
+
+La comparación con septiembre se hace comprobante por comprobante: salieron 280
+comprobantes por $ 83,5 millones de capital —$ 55,8 millones de Marpatag S.R.L.— e
+ingresaron 44 altas por $ 37,0 millones.
